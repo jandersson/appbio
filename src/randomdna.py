@@ -24,7 +24,7 @@ def seqname_from_time():
     return name
 
 parser = argparse.ArgumentParser(description='Print a random DNA sequence in FASTA format')
-parser.add_argument('--length', dest='length', default=None, type=int, help='Length of the DNA sequence')
+parser.add_argument('--length', dest='length', type=int, help='Length of the DNA sequence')
 parser.add_argument('--name', dest='name', help='Name of the sequence')
 args = parser.parse_args()
 
