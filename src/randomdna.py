@@ -23,14 +23,15 @@ def seqname_from_time():
     name += re.sub(r'\s', '_', str(datetime.datetime.now()).split('.')[0])
     return name
 
-parser = argparse.ArgumentParser(description='Print a random DNA sequence in FASTA format')
-parser.add_argument('--length', dest='length', type=int, help='Length of the DNA sequence')
-parser.add_argument('--name', dest='name', help='Name of the sequence')
-args = parser.parse_args()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Print a random DNA sequence in FASTA format')
+    parser.add_argument('--length', dest='length', type=int, help='Length of the DNA sequence')
+    parser.add_argument('--name', dest='name', help='Name of the sequence')
+    args = parser.parse_args()
 
-length = args.length or int(input("Length: "))
-name = args.name or seqname_from_time()
+    length = args.length or int(input("Length: "))
+    name = args.name or seqname_from_time()
 
-sequence = generate_sequence(length)
-fasta_string = to_fasta(name, sequence)
-print(fasta_string)
+    sequence = generate_sequence(length)
+    fasta_string = to_fasta(name, sequence)
+    print(fasta_string)
