@@ -7,13 +7,13 @@ def generate_sequence(length):
     if length < 1: return
 
     pairings = ['G', 'C', 'A', 'T']
-    return random.choices(pairings, k=length)
+    return ''.join(random.choices(pairings, k=length))
 
 def to_fasta(name, sequence):
     """Format a DNA sequence string in FASTA"""
     fasta_sequence = ""
     fasta_sequence += f">{name}\n"
-    fasta_sequence += re.sub("(.{60})", "\\1\n", sequence, 0, re.DOTALL)
+    fasta_sequence += re.sub("(.{60})", "\\1\n", sequence, flags=re.DOTALL)
     return fasta_sequence
 
 parser = argparse.ArgumentParser(description='Print a random DNA sequence in FASTA format')
