@@ -28,13 +28,8 @@ parser.add_argument('--length', dest='length', type=int, help='Length of the DNA
 parser.add_argument('--name', dest='name', help='Name of the sequence')
 args = parser.parse_args()
 
-if not args.length:
-    length = int(input("Length: "))
-else:
-    length = args.length
-
-if not args.name:
-    name = seqname_from_time()
+length = args.length or int(input("Length: "))
+name = args.name or seqname_from_time()
 
 sequence = generate_sequence(length)
 fasta_string = to_fasta(name, sequence)
