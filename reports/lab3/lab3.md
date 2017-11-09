@@ -54,6 +54,7 @@ CACCCTTTAGGACTCTAATGATAATTCTTGGACAGACAGA
 
 ## Discussion
 1. Which function do you find most useful for this assignment?
+
     The `choice` function in the `random` module worked well for doing sampling with replacement. The `re.sub` function allowed me to easily format the data to FASTA by inserting a line break every 80 characters. The `argparse` module was good for creating a command line application, allowing for a user-defined sequence length and name.
 
 2. What distribution do you want for the nucleotides?
