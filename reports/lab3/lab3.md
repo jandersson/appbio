@@ -1,5 +1,11 @@
 # Lab 3: Random DNA Sequence
 
+## Task
+
+Write a python script that will generate a random DNA sequence and output it in FASTA format. The user should specify the length, and a name should be suggested.
+
+edit: Ive allowed the user to specify a name. If none is given we'll generate one using a timestamp.
+
 ## Code
 
 Since the code is relatively concise, I'll include it in this report.
@@ -8,6 +14,7 @@ Since the code is relatively concise, I'll include it in this report.
 import random
 import argparse
 import re
+import datetime
 
 def generate_sequence(length):
     """Generate a random DNA sequence"""
@@ -23,6 +30,12 @@ def to_fasta(name, sequence):
     fasta_sequence += re.sub("(.{80})", "\\1\n", sequence, flags=re.DOTALL)
     return fasta_sequence
 
+def default_seqname():
+    """Generate a name using a timestamp"""
+    name = "Random_DNA_Sequence_"
+    name += re.sub(r'\s', '_', str(datetime.datetime.now()).split('.')[0])
+    return name
+
 parser = argparse.ArgumentParser(description='Print a random DNA sequence in FASTA format')
 parser.add_argument('--length', dest='length', default=None, type=int, help='Length of the DNA sequence')
 parser.add_argument('--name', dest='name', help='Name of the sequence')
@@ -34,9 +47,7 @@ else:
     length = args.length
 
 if not args.name:
-    name = input("Name: ")
-else:
-    name = args.name
+    name = default_seqname()
 
 sequence = generate_sequence(length)
 fasta_string = to_fasta(name, sequence)
