@@ -2,8 +2,10 @@ class StockholmReader:
     def __init__(self):
         self.data = None
         self.filename = None
+        self.sequences = dict()
 
     def read_file(self, filename):
+        self.data = None
         with open(filename, 'r') as f:
             self.data = f.readlines()
         if not self.data:
@@ -11,18 +13,20 @@ class StockholmReader:
         self.read_sequences()
     
     def read(self, data):
+        self.data = None
         self.data = data.splitlines()
         self.read_sequences()
 
     def read_sequences(self):
-        """Populate the sequences list in the given input file"""
-        self.sequences = []
+        """Populate the sequences dictionary in the given input file"""
         for line in self.data:
             if not self.is_sequence_line(line):
                 continue
             if not line.strip():
                 continue
-            self.sequences += [line.split()[0]]
+            name = line.split('\t')[0]
+            sequence = line.rsplit('\t', maxsplit=1)[1].strip('\n')
+            self.sequences[name] = sequence
 
     def print_sequence_names(self):
         """Print out the list of sequences and the number of sequences"""
