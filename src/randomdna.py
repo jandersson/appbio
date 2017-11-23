@@ -2,6 +2,7 @@ import random
 import argparse
 import re
 import datetime
+from dnasequence import to_fasta
 
 def generate_sequence(length):
     """Generate a random DNA sequence"""
@@ -9,13 +10,6 @@ def generate_sequence(length):
 
     alphabet = ['G', 'C', 'A', 'T']
     return ''.join(random.choices(alphabet, k=length))
-
-def to_fasta(name, sequence):
-    """Format a DNA sequence string in FASTA"""
-    fasta_sequence = ""
-    fasta_sequence += f">{name}\n"
-    fasta_sequence += re.sub("(.{80})", "\\1\n", sequence, flags=re.DOTALL)
-    return fasta_sequence
 
 def seqname_from_time():
     """Generate a name using a timestamp"""
