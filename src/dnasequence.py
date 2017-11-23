@@ -1,4 +1,3 @@
-
 def to_fasta(name, sequence, max_width=60):
     """Format a DNA sequence string in FASTA"""
     fasta_sequence = ""
@@ -10,9 +9,7 @@ if __name__ == '__main__':
     from stockholm_reader import StockholmReader
     reader = StockholmReader()
     test_string = """# STOCKHOLM 1.0 
-prot17      MAGQDPRLRGEPLKHVLVIDDDVAMRHLIVEYLTIHAFKVTAVADSKQFNRVLCSETVDVVVV
-prot4711    AAGQDVRLRGEPL----VIDDDVAMRHLIVEYLTIDAFKVTAVADSKQFNRVLCSETVDVVVV
+prot17\t\tMAGQDPRLRGEPLKHVLVIDDDVAMRHLIVEYLTIHAFKVTAVADSKQFNRVLCSETVDVVVV
+prot4711\tAAGQDVRLRGEPL----VIDDDVAMRHLIVEYLTIDAFKVTAVADSKQFNRVLCSETVDVVVV
 //"""
     reader.read(test_string)
-    reader.print_sequence_names()
-
