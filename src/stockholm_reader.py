@@ -22,7 +22,7 @@ class StockholmReader:
                 continue
             if not line.strip():
                 continue
-            line_data = line.expandtabs().split()[0]
+            name = line.expandtabs().split()[0]
             sequence = line.expandtabs().split()[1]
             self.sequences[name] = sequence
 
