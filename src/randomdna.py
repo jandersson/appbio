@@ -1,5 +1,6 @@
 import random
 import argparse
+import re
 import datetime
 from dnasequence import to_fasta
 
