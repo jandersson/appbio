@@ -1,13 +1,18 @@
 class StockholmReader:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self):
+        self.data = None
+        self.filename = None
+
+    def read_file(self, filename):
         with open(filename, 'r') as f:
             self.data = f.readlines()
         if not self.data:
             raise Exception
-        
         self.read_sequences()
-        self.print_sequences()
+    
+    def read(self, data):
+        self.data = data
+        self.read_sequences()
 
     def read_sequences(self):
         """Populate the sequences list in the given input file"""
@@ -19,7 +24,7 @@ class StockholmReader:
                 continue
             self.sequences += [line.split()[0]]
 
-    def print_sequences(self):
+    def print_sequence_names(self):
         """Print out the list of sequences and the number of sequences"""
         print(len(self.sequences))
         for sequence in self.sequences:
@@ -39,4 +44,6 @@ if __name__ == '__main__':
     test_files = ['shortseqs.sthlm', 'longseqs.sthlm', 'cornercase.sthlm']
     for data_file in test_files:
         data = os.path.join(data_path, data_file)
-        reader = StockholmReader(data)        
+        reader = StockholmReader()
+        reader.read_file(data)        
+        reader.print_sequence_names()
