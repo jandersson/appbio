@@ -11,7 +11,7 @@ class StockholmReader:
         self.read_sequences()
     
     def read(self, data):
-        self.data = data
+        self.data = data.splitlines()
         self.read_sequences()
 
     def read_sequences(self):
