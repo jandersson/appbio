@@ -8,8 +8,6 @@ class StockholmReader:
         self.data = None
         with open(filename, 'r') as f:
             self.data = f.readlines()
-        if not self.data:
-            raise Exception
         self.read_sequences()
     
     def read(self, data):
@@ -24,8 +22,8 @@ class StockholmReader:
                 continue
             if not line.strip():
                 continue
-            name = line.split('\t')[0]
-            sequence = line.rsplit('\t', maxsplit=1)[1].strip('\n')
+            line_data = line.expandtabs().split()[0]
+            sequence = line.expandtabs().split()[1]
             self.sequences[name] = sequence
 
     def print_sequence_names(self):
