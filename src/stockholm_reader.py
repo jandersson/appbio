@@ -40,10 +40,10 @@ class StockholmReader:
 
 if __name__ == '__main__':
     import os
+    reader = StockholmReader()
     data_path = '/home/jonas/appbio/data/'
     test_files = ['shortseqs.sthlm', 'longseqs.sthlm', 'cornercase.sthlm']
     for data_file in test_files:
         data = os.path.join(data_path, data_file)
-        reader = StockholmReader()
         reader.read_file(data)        
         reader.print_sequence_names()
