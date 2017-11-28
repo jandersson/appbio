@@ -10,7 +10,10 @@ class StockholmReader(SequenceReader):
             if not line.strip():
                 continue
             name = line.expandtabs().split()[0]
-            sequence = line.expandtabs().split()[1]
+            try:
+                sequence = line.expandtabs().split()[1]
+            except IndexError:
+                sequence = ""
             self.sequences[name] = sequence
 
     def is_sequence_line(self, line):
@@ -24,7 +27,7 @@ class StockholmReader(SequenceReader):
 if __name__ == '__main__':
     import os
     reader = StockholmReader()
-    data_path = '/home/jonas/appbio/data/'
+    data_path = os.path.join(os.path.dirname(__file__), os.pardir, 'data')
     test_files = ['shortseqs.sthlm', 'longseqs.sthlm', 'cornercase.sthlm']
     for data_file in test_files:
         data = os.path.join(data_path, data_file)
