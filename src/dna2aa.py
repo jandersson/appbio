@@ -1,4 +1,5 @@
 from fasta_reader import FastaReader
+from dnasequence import to_fasta
 
 start_codon = 'ATG'
 stop_codons = ['TAA', 'TAG', 'TGA']
@@ -12,7 +13,7 @@ rna_to_aa = {
     'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
     'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
     'UAU': 'Y',
-    'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop',
+    'UAA': '', 'UAG': '', 'UGA': '',
     'CAU': 'H', 'CAC': 'H',
     'CAA': 'Q', 'CAG': 'Q',
     'AAU': 'N', 'AAC': 'N',
@@ -27,8 +28,10 @@ rna_to_aa = {
     'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'
 }
 
-def to_aa(codon):
+def codon_to_aa(codon):
     """Translate a codon to an amino acid. Return 'X' if the codon is ambiguous"""
+    if len(codon) != 3:
+        return ''
     codon = codon.upper().replace('T', 'U')
     return rna_to_aa.get(codon, 'X')
 
@@ -58,18 +61,25 @@ def orf_length(sequence, stop_codon):
     return len(sequence[:stop_index])
 
 def find_longest_orf(sequence, start_indices):
-    [orf_length(sequence, stop_codon) for stop_codon in stop_codons]
-
+    best_length = 0
+    best_start = 0
+    best_stop = ""
+    for start_index in start_indices:
+        for stop_codon in stop_codons:
+            length = orf_length(sequence[start_index:], stop_codon)
+            if length > best_length:
+                best_length = length
+                best_start = start_index
+                best_stop = stop_codon
+    return sequence[best_start:best_start+best_length-1]
 
 def translate_to_aa(sequence):
-    aa_sequence = ""
-    start_locs = find_start_codons(sequence)
-    find_longest_orf(sequence, start_locs)
-    return aa_sequence
-    #find start codon indices
-    #find longest ORF using start codon indices
-    #translate longest ORF
-    #split sequence into 3 character strings
+    acid_list = []
+    for offset in range(3):
+        codons = [sequence[i:i+3] for i in range(offset, len(sequence), 3)]
+        acids = ''.join([codon_to_aa(codon) for codon in codons])
+        acid_list.append(acids)
+    return max(acid_list, key=len)
 
 if __name__ == '__main__':
     import os
@@ -80,5 +90,6 @@ if __name__ == '__main__':
         data = os.path.join(data_path, data_file)
         reader.read_file(data)
         for name, sequence in reader.sequences.items():
-            translate_to_aa(sequence)
+            acids = translate_to_aa(sequence)
+            print(to_fasta(name, acids))
     
