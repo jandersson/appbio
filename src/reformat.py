@@ -11,7 +11,7 @@ def is_valid_file(filename, parser):
 
 if __name__ == '__main__':
     import argparse
-    from dnasequence import to_fasta
+    from fasta_writer import to_fasta
 
     parser = argparse.ArgumentParser(description='Read a Stockholm formatted file and output as FASTA')
     parser.add_argument('-f', help="The name of the Stockholm file", required=True, 

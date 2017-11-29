@@ -2,7 +2,7 @@ import random
 import argparse
 import re
 import datetime
-from dnasequence import to_fasta
+from fasta_writer import to_fasta
 
 def generate_sequence(length):
     """Generate a random DNA sequence"""
