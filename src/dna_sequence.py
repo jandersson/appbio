@@ -8,6 +8,9 @@ class DnaSequence(object):
     def __repr__(self):
         return self.sequence
 
+    def __str__(self):
+        return self.sequence 
+
     def __sub__(self, other):
         return self.diff(other)
 
