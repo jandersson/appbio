@@ -1,4 +1,5 @@
 from sequence_reader import SequenceReader
+from dna_sequence import DnaSequence
 
 
 class FastaReader(SequenceReader):
@@ -19,11 +20,11 @@ class FastaReader(SequenceReader):
     def read_sequences(self):
         for line in self.data:
             if self.is_sequence_name_line(line):
-                sequence = ""
+                sequence = DnaSequence()
                 name = self.get_sequence_name(line)
                 self.sequences[name] = sequence
             else:
-                self.sequences[name] += self.get_sequence(line)
+                self.sequences[name].sequence += self.get_sequence(line)
 
 if __name__ == '__main__':
     import os
