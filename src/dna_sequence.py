@@ -4,6 +4,22 @@ class DnaSequence(object):
         self._gc_content = 0
 
     @property
+    def c_count(self):
+        return self.sequence.count('C')
+
+    @property
+    def a_count(self):
+        return self.sequence.count('A')
+    
+    @property
+    def t_count(self):
+        return self.sequence.count('T')
+
+    @property
+    def g_count(self):
+        return self.sequence.count('G')
+
+    @property
     def sequence(self):
         return self._sequence
 
@@ -20,17 +36,20 @@ class DnaSequence(object):
         if self._sequence == "":
             self._gc_content = 0
         else:
-            seq = self._sequence
-            cytosine_count = seq.count('C')
-            guanine_count = seq.count('G')
-            adanine_count = seq.count('A')
-            thymine_count = seq.count('T')
+            cytosine_count = self.c_count
+            guanine_count = self.g_count
+            adanine_count = self.a_count
+            thymine_count = self.t_count
             try:
                 self._gc_content = (guanine_count + cytosine_count) / (cytosine_count + guanine_count + adanine_count + thymine_count)
             except ZeroDivisionError:
                 self._gc_content = 0
     def __repr__(self):
         return self.sequence
+
+    def diff(self, other_sequence):
+        """Compute the composition difference using root-mean-square"""
+        
 
 if __name__ == '__main__':
     s = DnaSequence()
