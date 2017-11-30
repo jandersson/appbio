@@ -31,6 +31,22 @@ class DnaSequence(object):
         return self.sequence.count('G')
 
     @property
+    def a_ratio(self):
+        return (self.a_count) / (self.a_count + self.g_count + self.c_count + self.t_count)
+
+    @property
+    def c_ratio(self):
+        return (self.c_count) / (self.a_count + self.g_count + self.c_count + self.t_count)
+
+    @property
+    def g_ratio(self):
+        return (self.g_count) / (self.a_count + self.g_count + self.c_count + self.t_count)
+
+    @property
+    def t_ratio(self):
+        return (self.t_count) / (self.a_count + self.g_count + self.c_count + self.t_count) 
+
+    @property
     def sequence(self):
         return self._sequence
 
@@ -58,10 +74,9 @@ class DnaSequence(object):
 
     def diff(self, other_sequence):
         """Compute the composition difference using root-mean-square"""
-        return sqrt(((self.a_count - other_sequence.a_count) ** 2) \
-    + ((self.c_count - other_sequence.c_count) ** 2) \
-    + ((self.g_count - other_sequence.g_count) ** 2) \
-    + ((self.t_count- other_sequence.t_count) ** 2) / 4)
+        numerator = ((self.a_ratio - other_sequence.a_ratio) ** 2) + ((self.c_ratio - other_sequence.c_ratio) ** 2) + ((self.g_ratio - other_sequence.g_ratio) ** 2) + ((self.t_ratio - other_sequence.t_ratio) ** 2)
+        numerator = numerator * 0.25
+        return sqrt(numerator)
 
 if __name__ == '__main__':
     s = DnaSequence()
