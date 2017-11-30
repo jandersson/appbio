@@ -10,8 +10,8 @@ class FastaReader(SequenceReader):
         """If the line is a sequence name, process and return"""
         if not self.is_sequence_name_line(line):
             return
-
-        return line[1:].rstrip()
+        
+        return line.split()[0].rstrip()[1:]
 
     def get_sequence(self, line):
         """Process sequence line and return it"""
