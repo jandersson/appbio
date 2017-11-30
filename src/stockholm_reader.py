@@ -1,19 +1,6 @@
-class StockholmReader:
-    def __init__(self):
-        self.data = None
-        self.filename = None
-        self.sequences = dict()
+from sequence_reader import SequenceReader
 
-    def read_file(self, filename):
-        self.data = None
-        with open(filename, 'r') as f:
-            self.data = f.readlines()
-        self.read_sequences()
-    
-    def read(self, data):
-        self.data = None
-        self.data = data.splitlines()
-        self.read_sequences()
+class StockholmReader(SequenceReader):
 
     def read_sequences(self):
         """Populate the sequences dictionary in the given input file"""
@@ -23,14 +10,11 @@ class StockholmReader:
             if not line.strip():
                 continue
             name = line.expandtabs().split()[0]
-            sequence = line.expandtabs().split()[1]
+            try:
+                sequence = line.expandtabs().split()[1]
+            except IndexError:
+                sequence = ""
             self.sequences[name] = sequence
-
-    def print_sequence_names(self):
-        """Print out the list of sequences and the number of sequences"""
-        print(len(self.sequences))
-        for sequence in self.sequences:
-            print(sequence)
 
     def is_sequence_line(self, line):
         """"Check if a line contains a sequence"""
@@ -43,7 +27,7 @@ class StockholmReader:
 if __name__ == '__main__':
     import os
     reader = StockholmReader()
-    data_path = '/home/jonas/appbio/data/'
+    data_path = os.path.join(os.path.dirname(__file__), os.pardir, 'data')
     test_files = ['shortseqs.sthlm', 'longseqs.sthlm', 'cornercase.sthlm']
     for data_file in test_files:
         data = os.path.join(data_path, data_file)
