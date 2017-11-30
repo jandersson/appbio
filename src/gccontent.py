@@ -1,4 +1,4 @@
-# TODO: Print GC output from a sequence, formatted with ~4 decimal places
+# TODO: Formatted output with 4 decimal places
 import os
 
 def get_data(filename):
