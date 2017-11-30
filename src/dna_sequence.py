@@ -20,8 +20,10 @@ class DnaSequence(object):
             guanine_count = seq.count('G')
             adanine_count = seq.count('A')
             thymine_count = seq.count('T')
-            self.gc_content = (guanine_count + cytosine_count) / (cytosine_count + guanine_count + adanine_count + thymine_count)
-
+            try:
+                self.gc_content = (guanine_count + cytosine_count) / (cytosine_count + guanine_count + adanine_count + thymine_count)
+            except ZeroDivisionError:
+                self.gc_content = 0
     def __repr__(self):
         return self.sequence
 
