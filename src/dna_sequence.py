@@ -1,7 +1,15 @@
+from math import sqrt
+
 class DnaSequence(object):
     def __init__(self, sequence=''):
         self.sequence = sequence
         self._gc_content = 0
+
+    def __repr__(self):
+        return self.sequence
+
+    def __sub__(self, other):
+        return self.diff(other)
 
     @property
     def c_count(self):
@@ -44,12 +52,13 @@ class DnaSequence(object):
                 self._gc_content = (guanine_count + cytosine_count) / (cytosine_count + guanine_count + adanine_count + thymine_count)
             except ZeroDivisionError:
                 self._gc_content = 0
-    def __repr__(self):
-        return self.sequence
 
     def diff(self, other_sequence):
         """Compute the composition difference using root-mean-square"""
-        
+        return sqrt(((self.a_count - other_sequence.a_count) ** 2) \
+    + ((self.c_count - other_sequence.c_count) ** 2) \
+    + ((self.g_count - other_sequence.g_count) ** 2) \
+    + ((self.t_count- other_sequence.t_count) ** 2) / 4)
 
 if __name__ == '__main__':
     s = DnaSequence()
@@ -59,3 +68,7 @@ if __name__ == '__main__':
     s = DnaSequence('GCAT')
     print(s.sequence)
     print(s.gc_content)
+    print(s.diff(DnaSequence('GCAT')))
+    print(s.diff(DnaSequence('GATTACA')))
+    print(s - DnaSequence('GCAT'))
+    print(DnaSequence('GCAT') - s)
