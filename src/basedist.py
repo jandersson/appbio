@@ -1,4 +1,4 @@
-def distance_matrix(sequences):
+def compute_distance_matrix(sequences):
     rows = []
     for name, sequence in sequences.items():
         row = []
@@ -6,7 +6,14 @@ def distance_matrix(sequences):
         for other_name, other_sequence in sequences.items():
             row.append(sequence - other_sequence)
         rows.append(row)
-    print(rows)
+    return rows
+
+def print_distance_matrix(matrix):
+    print(f"   {len(matrix)}")
+    row_format = "{:<10}" + ("{:_<10.3f}" * (len(matrix)))
+    for row in matrix:
+        print(row_format.format(row[0], *row[1:]))
+
 
 if __name__ == '__main__':
     from common import is_valid_file
@@ -26,4 +33,5 @@ if __name__ == '__main__':
         reader.read_file(file)
         sequences.update(reader.sequences)
 
-    distance_matrix(sequences)
+    matrix = compute_distance_matrix(sequences)
+    print_distance_matrix(matrix)
