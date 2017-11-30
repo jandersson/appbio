@@ -5,14 +5,10 @@ def get_data(filename):
     """Returns a filehandler from ../data/filename if it exists"""
     pass
 
-def is_valid_file(file, parser):
-    if not os.path.exists(file):
-        parser.error(f"Could not find the file: {file}")    
-    return file
-
 if __name__ == '__main__':
     import argparse
     import fasta_reader
+    from common import is_valid_file
 
     parser = argparse.ArgumentParser(description='Compute GC content of a DNA sequence')
     parser.add_argument('files', nargs='+', help='File or list of files to be processed', type=lambda f: is_valid_file(f, parser))
