@@ -74,7 +74,11 @@ class DnaSequence(object):
 
     def diff(self, other_sequence):
         """Compute the composition difference using root-mean-square"""
-        numerator = ((self.a_ratio - other_sequence.a_ratio) ** 2) + ((self.c_ratio - other_sequence.c_ratio) ** 2) + ((self.g_ratio - other_sequence.g_ratio) ** 2) + ((self.t_ratio - other_sequence.t_ratio) ** 2)
+        numerator = ((self.a_ratio - other_sequence.a_ratio) ** 2) \
+        + ((self.c_ratio - other_sequence.c_ratio) ** 2) \
+        + ((self.g_ratio - other_sequence.g_ratio) ** 2) \
+        + ((self.t_ratio - other_sequence.t_ratio) ** 2)
+
         numerator = numerator * 0.25
         return sqrt(numerator)
 
