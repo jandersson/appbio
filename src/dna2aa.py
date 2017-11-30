@@ -1,5 +1,5 @@
 from fasta_reader import FastaReader
-from dnasequence import to_fasta
+from fasta_writer import to_fasta
 
 rna_to_aa = {
     'UUU': 'F', 'UUC': 'F',
