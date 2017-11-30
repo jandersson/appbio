@@ -23,7 +23,7 @@ class DnaSequence(object):
             self.gc_content = (guanine_count + cytosine_count) / (cytosine_count + guanine_count + adanine_count + thymine_count)
 
     def __repr__(self):
-        return self._sequence
+        return self.sequence
 
 if __name__ == '__main__':
     s = DnaSequence()
