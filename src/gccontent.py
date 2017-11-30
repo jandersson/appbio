@@ -1,6 +1,4 @@
-# TODO: Read in a file
 # TODO: Print GC output from a sequence, formatted with ~4 decimal places
-# TODO: Setup argparse to grab a list of files
 import os
 
 def get_data(filename):
@@ -23,3 +21,8 @@ if __name__ == '__main__':
     readers = []
     for file in args.files:
         reader = fasta_reader.FastaReader()
+        reader.read_file(file)
+        readers.append(reader)
+    for reader in readers:
+        for name, sequence in reader.sequences.items():
+            print(sequence.gc_content)
