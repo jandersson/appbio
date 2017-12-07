@@ -3,6 +3,7 @@ def compute_distance_matrix(sequences):
     for name, sequence in sequences.items():
         row = []
         row.append(name[:10])
+        # TODO: fill in empty spaces or phylip will complain
         for other_name, other_sequence in sequences.items():
             row.append(sequence - other_sequence)
         rows.append(row)
@@ -10,7 +11,7 @@ def compute_distance_matrix(sequences):
 
 def print_distance_matrix(matrix):
     print(f"   {len(matrix)}")
-    row_format = "{:<10}" + ("{:_<10.3f}" * (len(matrix)))
+    row_format = "{:<10}" + ("{:<10.3f}" * (len(matrix)))
     for row in matrix:
         print(row_format.format(row[0], *row[1:]))
 
