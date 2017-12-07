@@ -26,10 +26,10 @@ class StockholmReader(SequenceReader):
 
 if __name__ == '__main__':
     import os
-    reader = StockholmReader()
     data_path = os.path.join(os.path.dirname(__file__), os.pardir, 'data')
     test_files = ['shortseqs.sthlm', 'longseqs.sthlm', 'cornercase.sthlm']
     for data_file in test_files:
+        reader = StockholmReader()
         data = os.path.join(data_path, data_file)
         reader.read_file(data)        
         reader.print_sequence_names()
