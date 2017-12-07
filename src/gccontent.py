@@ -22,3 +22,4 @@ if __name__ == '__main__':
     for reader in readers:
         for name, sequence in reader.sequences.items():
             print(sequence.gc_content)
+            print(sequence.c_count + sequence.t_count + sequence.a_count + sequence.g_count)
