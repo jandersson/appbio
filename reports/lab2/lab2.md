@@ -149,3 +149,34 @@ Write a script that reads a Stockholm-formatted file and writes the number of se
     The ORF describes all the potential amino acids that might be produced during transcription. By identifying all the possible coding sequences (CDS) we can find all the potential amino acids produced. Reading the sequence in the forward direction we can find 3 frames, and reading in the reverse (complement) direction we find the other 3.
 
     http://vlab.amrita.edu/?sub=3&brch=273&sim=1432&cnt=1
+
+## Demonstration
+
+```
+(appbio) jonas@Calculon:~/appbio$ python src/dna2aa.py data/translationtest.dna
+>single_stop_codon
+
+>stopcodons
+NSDNSDNSDNSDNSDNSDNSDNSDNS
+>ambiguities
+XXXXXXXXXXXXXXXXXX
+>proteinalphabet
+ARNDCQEGHILKIFPSTWYV
+>proteinalphabet2
+ARNDCQEGHILKIFPSTWYV
+>proteinalphabet3
+ARNDCQEGHILKIFPSTWYV
+>tooshort
+
+>short
+NS
+```
+
+```
+(appbio) jonas@Calculon:~/appbio$ python src/dna2aa.py data/an_exon.fa 
+>where_is_the_exon
+INSIPKLFLTVLLSCLPLGWSGRIVETEEIAEGTGGVGTRCWLCCILKATSASLGVACGG
+QATQLDVASSVLRIEQRQVRSFLWLLQQNQPITRGFGCHCPPSSQK
+
+```
+
