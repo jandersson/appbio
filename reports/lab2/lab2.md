@@ -147,3 +147,5 @@ Write a script that reads a Stockholm-formatted file and writes the number of se
 4. Why should a real ORF finder also look at the so-called Watson-Crick complement? 
 
     The ORF describes all the potential amino acids that might be produced during transcription. By identifying all the possible coding sequences (CDS) we can find all the potential amino acids produced. Reading the sequence in the forward direction we can find 3 frames, and reading in the reverse (complement) direction we find the other 3.
+
+    http://vlab.amrita.edu/?sub=3&brch=273&sim=1432&cnt=1
