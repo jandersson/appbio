@@ -1,11 +1,3 @@
-def to_seqboot(sequences):
-    length = len([value.sequence for value in sequences.values()][0])
-    seq_string = ""
-    seq_string += f"{len(sequences):5}    {length}\n"
-    for name, sequence in sequences.items():
-        seq_string += f"{name:10}{sequence}\n"
-    return seq_string
-
 if __name__ == '__main__':
     import argparse
     import tempfile
@@ -13,8 +5,6 @@ if __name__ == '__main__':
     import os
     from Bio import AlignIO
     from common import is_valid_file
-    from fasta_reader import FastaReader
-    from fasta_writer import to_fasta
 
     parser = argparse.ArgumentParser(description='Run Phylip bootstrap analysis on protein alignments')
     parser.add_argument('file', type=lambda f: is_valid_file(f, parser),
