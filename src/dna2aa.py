@@ -49,13 +49,19 @@ def translate_to_aa(sequence):
 
 if __name__ == '__main__':
     import os
-    data_path = os.path.join(os.path.dirname(__file__), os.pardir, 'data')
-    test_files = ['translationtest.dna', 'an_exon.fa']
-    for data_file in test_files:
+    import argparse
+    from common import is_valid_file
+
+    parser = argparse.ArgumentParser(
+        description='Find the longest open reading frame in a list of FASTA files'
+        )
+    parser.add_argument('files', nargs='+', help="List of FASTA files to search",
+                        type=lambda f: is_valid_file(f, parser))
+    args = parser.parse_args()
+    for data_file in args.files:
         reader = FastaReader()
-        data = os.path.join(data_path, data_file)
-        reader.read_file(data)
+        reader.read_file(data_file)
         for name, sequence in reader.sequences.items():
-            acids = translate_to_aa(sequence)
+            acids = translate_to_aa(sequence.sequence)
             print(to_fasta(name, acids))
     
