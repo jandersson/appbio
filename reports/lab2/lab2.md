@@ -136,8 +136,14 @@ Write a script that reads a Stockholm-formatted file and writes the number of se
 
 2. Why are we talking about a standard code?
     
-    The standard code refers to the encoding scheme used by the vast majority of genes. The encoding scheme is a mapping from nucleotide triplets to amino acids.
+    The standard code refers to the encoding scheme used by the vast majority of genes. This code maps genetic information to the genetic codes A,T,G,C. A coding sequence (CDS) is the region of DNA that is used by the ribosomal machinery to produce proteins.
 
 3. Looking for the longest ORF is a primitive way to find genes in prokaryotic genomes. Why does it not work for eukaryotes?
 
+    In eukaryotic genes with multiple exons, open reading frames span intro/exon regions. This means that the eukaryotic open reading frames are not continuous and interrupted by introns. This means that the search for the open reading frame needs to splice together the exon regions.
     
+    https://www.biostars.org/p/47022/
+    
+4. Why should a real ORF finder also look at the so-called Watson-Crick complement? 
+
+    The ORF describes all the potential amino acids that might be produced during transcription. By identifying all the possible coding sequences (CDS) we can find all the potential amino acids produced. Reading the sequence in the forward direction we can find 3 frames, and reading in the reverse (complement) direction we find the other 3.
