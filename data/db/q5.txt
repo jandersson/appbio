@@ -1,0 +1,6 @@
+-- How many proteins from each species are present in the database?
+SELECT species.common, COUNT(protein.sequence) as num_sequences 
+  FROM protein 
+  JOIN species 
+    ON protein.species = species.abbrev 
+GROUP BY protein.species;

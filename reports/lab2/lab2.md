@@ -120,22 +120,6 @@ Write a script that reads a Stockholm-formatted file and writes the number of se
 
 2. Why are we talking about a standard code?
     
-    The standard code refers to the encoding scheme used by the vast majority of genes. The encoding scheme is a mapping from nucleotide triplets to amino acids.
-
-3. Looking for the longest ORF is a primitive way to find genes in prokaryotic genomes. Why does it not work for eukaryotes?
-
-    
-# Translate DNA
-
-## Questions
-1. What are the "stop codons" in the standard code?
-    
-    Codons are three nucleotides, or a nucleotide triplet. A stop codon is a signal to terminate the translation into proteins. In DNA there are three stop codons: TAG, TAA, and TGA. A stop codon is sufficient to stop translation.
-
-    https://en.wikipedia.org/wiki/Stop_codon
-
-2. Why are we talking about a standard code?
-    
     The standard code refers to the encoding scheme used by the vast majority of genes. This code maps genetic information to the genetic codes A,T,G,C. A coding sequence (CDS) is the region of DNA that is used by the ribosomal machinery to produce proteins.
 
 3. Looking for the longest ORF is a primitive way to find genes in prokaryotic genomes. Why does it not work for eukaryotes?

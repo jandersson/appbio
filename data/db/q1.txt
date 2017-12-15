@@ -1,0 +1,2 @@
+-- what species are in the database? 
+SELECT name FROM species;

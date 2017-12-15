@@ -1,0 +1,8 @@
+-- What species are present in family NHR3? Give a full list with full species names using one SQL statement
+SELECT DISTINCT species.name, species.common 
+           FROM familymembers 
+		   JOIN protein 
+		     ON familymembers.protein = protein.accession 
+		   JOIN species 
+		     ON species.abbrev = protein.species 
+		  WHERE familymembers.family = 'NHR3';

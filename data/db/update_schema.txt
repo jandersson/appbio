@@ -1,0 +1,18 @@
+-- How do you change the schema to add information about a protein's structure? 
+-- You want to store the name for the structure (such as 2xkg, 5fvl, or 6eny, resolution (1.6Å, 1.97Å, or similar), 
+-- and method ("Solution NMR", "X-ray diffraction"). Remember that a protein may have several structures published. 
+-- Make your suggested changes and add some example data that you make up!
+DROP TABLE structure;
+
+CREATE TABLE IF NOT EXISTS structure (
+	protein VARCHAR(20),
+	name VARCHAR(50),
+	resolution NUMERIC,
+	method VARCHAR(50),
+	PRIMARY KEY(protein, name)
+);
+
+INSERT INTO structure(protein, name, resolution, method) VALUES('NH10_CAEEL', 'xfd88', 10.8, 'X-Ray Diffraction');
+INSERT INTO structure(protein, name, resolution, method) VALUES('NH10_CAEEL', 'xfd89', 1.52, 'Solution NMR');
+INSERT INTO structure(protein, name, resolution, method) VALUES('NR21_CHICK', 'ff98', 1.99, 'X-Ray Diffraction');
+

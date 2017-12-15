@@ -119,3 +119,31 @@ Between        And            Length
 ```
 
 ## Controlling Phylip Programs
+
+### Test Runs
+
+
+
+### Questions
+
+  1. How have you dealt with temporary files?
+
+  Used the tempfile module
+
+  Created a temporary directory and changed the working directory to this
+
+  Created a temporary file for SeqIO to write the Phylip formatted file
+
+  Used os.rename to rename infile to outfile, etc...
+
+  Temporary directory is removed after execution taking with it all the temporary files
+
+  2.  How have you worked with the subprocess module?
+
+  I had issues parsing text with subprocess. I used pexpect instead.
+
+  Spawn a process for each program used in the pipeline, use pexpect to scan for the expected output
+
+  Use pexpect to give the correct input
+
+  Wait for EOF for each process before moving on to the next

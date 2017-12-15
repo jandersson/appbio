@@ -1,0 +1,4 @@
+-- What proteins are longer than 1000 aa?
+SELECT accession 
+  FROM protein 
+ WHERE length(sequence) > 1000;

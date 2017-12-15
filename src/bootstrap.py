@@ -4,6 +4,7 @@ if __name__ == '__main__':
     import pexpect
     import os
     from Bio import AlignIO
+    import re
     from common import is_valid_file
 
     parser = argparse.ArgumentParser(description='Run Phylip bootstrap analysis on protein alignments')
@@ -13,7 +14,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     alignment = AlignIO.read(args.file, 'fasta')
+    tempdir = tempfile.TemporaryDirectory()
+    os.chdir(tempdir.name)
     infile = tempfile.NamedTemporaryFile(mode='w+t')
+    # Remove zero padding
+    for align in alignment:
+        align.id = re.sub(r'(?<=\D)0+', '', align.id)
     AlignIO.write(alignment, infile, 'phylip')
     infile.seek(0)
 
@@ -33,7 +39,7 @@ if __name__ == '__main__':
     infile.close()
     os.rename('outfile', 'infile')
     
-    protdist = pexpect.spawn('protdist', encoding='utf-8', timeout=60)
+    protdist = pexpect.spawn('protdist', encoding='utf-8', timeout=120)
     protdist.expect('Are these settings correct')
     protdist.sendline('2')
     protdist.sendline("M")
@@ -65,12 +71,7 @@ if __name__ == '__main__':
     consense.sendline('2')
     consense.sendline('Y')
     consense.expect(pexpect.EOF)
-    os.remove('infile')
-    os.remove('intree')
-    os.remove('outfile')
 
     with open('outtree', 'r') as f:
         for line in f:
             print(line, end='')
-
-    os.remove('outtree')
