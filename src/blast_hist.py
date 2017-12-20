@@ -12,7 +12,7 @@ if __name__ == '__main__':
     fd = open(args.infile, 'rU')
     record = list(NCBIXML.parse(fd))[0]
 
-    num_bins = 10
+    # num_bins = 20
     fig, ax = plt.subplots()
     scores = []
     
@@ -21,7 +21,7 @@ if __name__ == '__main__':
             # if score isn't the needed attribute then its probably expect or bits
             scores.append(hsp.score)
 
-    n, bins, patches = ax.hist(scores, num_bins)
+    n, bins, patches = ax.hist(scores)
     ax.set_xlabel('Scores')
     ax.set_ylabel('Count')
     ax.set_title('Histogram of BLAST Scores')
