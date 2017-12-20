@@ -41,10 +41,13 @@ def translate_to_aa(sequence):
         for codon in codons:
             acid = codon_to_aa(codon)
             if acid == 'Stop':
-                break
+                # break
+                acid_list.append(acids)
+                acids = ''
             else:
                 acids += acid
         acid_list.append(acids)
+    # return acid_list
     return max(acid_list, key=len)
 
 if __name__ == '__main__':
@@ -64,4 +67,5 @@ if __name__ == '__main__':
         for name, sequence in reader.sequences.items():
             acids = translate_to_aa(sequence.sequence)
             print(to_fasta(name, acids))
+            print(len(acids))
     
