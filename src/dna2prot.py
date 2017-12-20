@@ -1,10 +1,8 @@
 
 if __name__ == '__main__':
     from Bio import SeqIO
-    from Bio.Seq import Seq
     import warnings
     warnings.filterwarnings("ignore")
-    from Bio.Alphabet import generic_dna
     from common import is_valid_file
     import argparse
 
