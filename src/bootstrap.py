@@ -1,3 +1,6 @@
+def expand_accession(matchobj):
+    return short_acc_to_long_acc[matchobj.group(0)]
+
 if __name__ == '__main__':
     import argparse
     import tempfile
@@ -13,13 +16,17 @@ if __name__ == '__main__':
     parser.add_argument('num_replicates', help='Number of bootstrap replicates to run')
     args = parser.parse_args()
 
+    short_acc_to_long_acc = {}
+
     alignment = AlignIO.read(args.file, 'fasta')
     tempdir = tempfile.TemporaryDirectory()
     os.chdir(tempdir.name)
     infile = tempfile.NamedTemporaryFile(mode='w+t')
     # Remove zero padding
     for align in alignment:
-        align.id = re.sub(r'(?<=\D)0+', '', align.id)
+        compressed_accession = re.sub(r'(?<=\D)0+', '', align.id)
+        short_acc_to_long_acc[compressed_accession[:10]] = align.id
+        align.id = compressed_accession
     AlignIO.write(alignment, infile, 'phylip')
     infile.seek(0)
 
@@ -43,6 +50,7 @@ if __name__ == '__main__':
     protdist.expect('Are these settings correct')
     protdist.sendline('2')
     protdist.sendline("M")
+    # Set sequential
     protdist.expect('type D or W')
     protdist.sendline('D')
     protdist.expect('How many data sets')
@@ -74,4 +82,9 @@ if __name__ == '__main__':
 
     with open('outtree', 'r') as f:
         for line in f:
-            print(line, end='')
+            print(re.sub(
+                re.compile('|'.join(short_acc_to_long_acc.keys())),
+                expand_accession,
+                line
+            ), end='')
+            # print(line, end='')
