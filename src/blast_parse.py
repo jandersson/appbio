@@ -34,8 +34,6 @@ if __name__ == '__main__':
     for record in result:
         for alignment in record.alignments:
             if is_match(args.field, alignment):
-                best_hsp = None
-                best_e = E_THRESH
                 for hsp in alignment.hsps:
                     if hsp.expect < E_THRESH:
                         update_min(data, record.query, re.search('(?<=\|)\w+', alignment.hit_def).group(0), hsp.bits, hsp.expect)
